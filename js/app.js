@@ -154,7 +154,7 @@ var todos;
         templateUrl: function ($element, $attrs) {
             return $attrs.templateUrl;
         },
-        controller: TodoList
+        controller: TodoList,
     });
 })(todos || (todos = {}));
 var todos;
