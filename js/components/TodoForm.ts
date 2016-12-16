@@ -1,5 +1,4 @@
-(function () {
-    'use strict';
+namespace todos {
 
     class TodoForm {
         private newTodo: any = '';
@@ -42,4 +41,4 @@
                 store: '<'
             }
         });
-})();
+}

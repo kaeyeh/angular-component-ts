@@ -27,34 +27,55 @@ var todos;
         });
     });
 })(todos || (todos = {}));
-angular.module('todomvc')
-    .directive('todoFocus', function todoFocus($timeout) {
+var todos;
+(function (todos) {
+    var TodoFocus = (function () {
+        function TodoFocus($timeout) {
+            this.$timeout = $timeout;
+            this.restrict = 'A';
+        }
+        TodoFocus.prototype.link = function (scope, el, attrs) {
+            scope.$watch(attrs['todoFocus'], angular.bind(this, function (newVal) {
+                if (newVal) {
+                    this.$timeout(function () {
+                        el[0].focus();
+                    }, 0, false);
+                }
+            }));
+        };
+        TodoFocus.factory = function ($timeout) {
+            return new TodoFocus($timeout);
+        };
+        return TodoFocus;
+    }());
+    angular.module('todomvc')
+        .directive('todoFocus', ['$timeout', TodoFocus.factory]);
+})(todos || (todos = {}));
+var todos;
+(function (todos) {
     'use strict';
-    return function (scope, elem, attrs) {
-        scope.$watch(attrs.todoFocus, function (newVal) {
-            if (newVal) {
-                $timeout(function () {
-                    elem[0].focus();
-                }, 0, false);
-            }
-        });
-    };
-});
-angular.module('todomvc')
-    .directive('todoEscape', function () {
-    'use strict';
-    var ESCAPE_KEY = 27;
-    return function (scope, elem, attrs) {
-        elem.bind('keydown', function (event) {
-            if (event.keyCode === ESCAPE_KEY) {
-                scope.$apply(attrs.todoEscape);
-            }
-        });
-        scope.$on('$destroy', function () {
-            elem.unbind('keydown');
-        });
-    };
-});
+    var TodoEscape = (function () {
+        function TodoEscape() {
+            this.ESCAPE_KEY = 27;
+        }
+        TodoEscape.prototype.link = function (scope, elem, attrs) {
+            elem.bind('keydown', angular.bind(this, function (event) {
+                if (event.keyCode === this.ESCAPE_KEY) {
+                    scope.$apply(attrs.todoEscape);
+                }
+            }));
+            scope.$on('$destroy', function () {
+                elem.unbind('keydown');
+            });
+        };
+        TodoEscape.factory = function () {
+            return new TodoEscape();
+        };
+        return TodoEscape;
+    }());
+    angular.module('todomvc')
+        .directive('todoEscape', TodoEscape.factory);
+})(todos || (todos = {}));
 var todos;
 (function (todos_1) {
     'use strict';
@@ -161,26 +182,30 @@ var todos;
     }());
     LocalStore.$inject = ['$q'];
     angular.module('todomvc').service('localStorage', LocalStore);
-    angular.module('todomvc')
-        .provider('todoStorage', function () {
-        return {
-            type: 'local',
-            setType: function (type) {
-                this.type = type;
-            },
-            $get: function ($injector) {
-                if (this.type === 'api') {
-                    return $injector.get('api');
-                }
-                else {
-                    return $injector.get('localStorage');
-                }
+    var TodoStorageProvider = (function () {
+        function TodoStorageProvider() {
+            this.type = 'local';
+        }
+        TodoStorageProvider.prototype.setType = function (type) {
+            this.type = type;
+        };
+        TodoStorageProvider.prototype.$get = function ($injector) {
+            if (this.type === 'api') {
+                return $injector.get('api');
+            }
+            else {
+                return $injector.get('localStorage');
             }
         };
-    });
+        TodoStorageProvider.factory = function () {
+            return new TodoStorageProvider();
+        };
+        return TodoStorageProvider;
+    }());
+    angular.module('todomvc').provider('todoStorage', TodoStorageProvider.factory);
 })(todos || (todos = {}));
-(function () {
-    'use strict';
+var todos;
+(function (todos) {
     var TodoForm = (function () {
         function TodoForm(store) {
             this.store = store;
@@ -214,7 +239,7 @@ var todos;
             store: '<'
         }
     });
-})();
+})(todos || (todos = {}));
 var todos;
 (function (todos) {
     var TodoList = (function () {

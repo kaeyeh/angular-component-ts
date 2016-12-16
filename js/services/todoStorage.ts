@@ -149,6 +149,30 @@ namespace todos {
     angular.module('todomvc').service('localStorage', LocalStore);
 
 
+    class TodoStorageProvider {
+        private type: string = 'local';
+
+        constructor (){
+
+        }
+        setType (type: string) {
+            this.type = type
+        }
+        // Detect if an API backend is present. If so, return the API module, else
+        // hand off the localStorage adapter
+        $get ($injector: any) {
+
+            if (this.type === 'api') {
+                return $injector.get('api');
+            }
+            else {
+                return $injector.get('localStorage');
+            }
+        }
+        static factory () {
+                return new TodoStorageProvider();
+        }
+    }
     /**
      * Services that persists and retrieves todos from localStorage or a backend API
      * if available.
@@ -157,25 +181,6 @@ namespace todos {
      * model.
      */
 
-    angular.module('todomvc')
-        .provider('todoStorage', function ( ) {
+    angular.module('todomvc').provider('todoStorage', TodoStorageProvider.factory);
 
-            return {
-                type: 'local',
-                setType: function (type: string) {
-                    this.type = type
-                },
-                // Detect if an API backend is present. If so, return the API module, else
-                // hand off the localStorage adapter
-                $get: function ($injector: any) {
-
-                    if (this.type === 'api') {
-                        return $injector.get('api');
-                    }
-                    else {
-                        return $injector.get('localStorage');
-                    }
-                }
-            }
-        });
 }
