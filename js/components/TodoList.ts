@@ -119,10 +119,6 @@ namespace todos {
     angular.module('todomvc').component('todoList', {
         //templateUrl: 'js/components/TodoList.html',
         templateUrl: 'TodoList.html',
-        controller: TodoList,
-        bindings: {
-            // one-way attribute binding,
-            store: '<'
-        }
+        controller: TodoList
     });
 }

@@ -36,9 +36,6 @@ namespace todos {
         .component('todoForm', {
             //templateUrl: 'js/components/TodoForm.html',
             templateUrl: 'TodoForm.html',
-            controller: TodoForm,
-            bindings: {
-                store: '<'
-            }
+            controller: TodoForm
         });
 }

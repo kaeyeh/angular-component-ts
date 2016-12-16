@@ -57,10 +57,7 @@ var todos;
     angular.module('todomvc')
         .component('todoForm', {
         templateUrl: 'TodoForm.html',
-        controller: TodoForm,
-        bindings: {
-            store: '<'
-        }
+        controller: TodoForm
     });
 })(todos || (todos = {}));
 var todos;
@@ -153,10 +150,7 @@ var todos;
     ];
     angular.module('todomvc').component('todoList', {
         templateUrl: 'TodoList.html',
-        controller: TodoList,
-        bindings: {
-            store: '<'
-        }
+        controller: TodoList
     });
 })(todos || (todos = {}));
 var todos;
