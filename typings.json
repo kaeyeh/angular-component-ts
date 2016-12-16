@@ -1,0 +1,11 @@
+{
+  "name": "todomvc",
+  "globalDependencies": {
+    "angular": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular.d.ts#398bd742115e2b071ab3edf8b543b6df6fa62dc2",
+    "jquery": "github:DefinitelyTyped/DefinitelyTyped/jquery/jquery.d.ts#398bd742115e2b071ab3edf8b543b6df6fa62dc2",
+    "underscore": "registry:dt/underscore#1.7.0+20160622050840"
+  },
+  "dependencies": {
+    "angular-ui-router": "registry:dt/angular-ui-router#1.1.5+20161122230850"
+  }
+}

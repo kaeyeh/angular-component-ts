@@ -1,0 +1,48 @@
+<script type="text/ng-template" id="TodoForm.html">
+    <form id="todo-form" ng-submit="$ctrl.addTodo()">
+        <input id="new-todo" placeholder="What needs to be done?" ng-model="$ctrl.newTodo" ng-disabled="$ctrl.saving"
+               autofocus>
+    </form>
+</script>
+
+<script type="text/ng-template" id="TodoList.html">
+    <section id="main" ng-show="$ctrl.todos.length" ng-cloak>
+        <input id="toggle-all" type="checkbox" ng-model="$ctrl.allChecked" ng-click="$ctrl.markAll($ctrl.allChecked)">
+        <label for="toggle-all">Mark all as complete</label>
+        <ul id="todo-list">
+            <li ng-repeat="todo in $ctrl.todos | filter:$ctrl.statusFilter track by $index"
+                ng-class="{completed: todo.completed, editing: todo == $ctrl.editedTodo}">
+                <div class="view">
+                    <input class="toggle" type="checkbox" ng-model="todo.completed"
+                           ng-change="$ctrl.toggleCompleted(todo)">
+                    <label ng-dblclick="$ctrl.editTodo(todo)">{{todo.title}}</label>
+                    <button class="destroy" ng-click="$ctrl.removeTodo(todo)"></button>
+                </div>
+                <form ng-submit="$ctrl.saveEdits(todo, 'submit')">
+                    <input class="edit" ng-trim="false" ng-model="todo.title" todo-escape="$ctrl.revertEdits(todo)"
+                           ng-blur="$ctrl.saveEdits(todo, 'blur')" todo-focus="todo == $ctrl.editedTodo">
+                </form>
+            </li>
+        </ul>
+    </section>
+    <footer id="footer" ng-show="$ctrl.todos.length" ng-cloak>
+					<span id="todo-count" ng-cloak><strong>{{$ctrl.remainingCount}}</strong>
+						<ng-pluralize count="$ctrl.remainingCount"
+                                      when="{ one: 'item left', other: 'items left' }"></ng-pluralize>
+					</span>
+        <ul id="filters">
+            <li>
+                <a ng-class="{selected: status == ''} " href="#/">All</a>
+            </li>
+            <li>
+                <a ng-class="{selected: status == 'active'}" href="#/active">Active</a>
+            </li>
+            <li>
+                <a ng-class="{selected: status == 'completed'}" href="#/completed">Completed</a>
+            </li>
+        </ul>
+        <button id="clear-completed" ng-click="$ctrl.clearCompletedTodos()" ng-show="$ctrl.completedCount">Clear
+            completed
+        </button>
+    </footer>
+</script>
