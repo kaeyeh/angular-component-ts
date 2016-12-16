@@ -10,7 +10,7 @@ namespace todos
 {
 
     angular.module('todomvc', ['ui.router', 'ngResource'])
-        .config(['$stateProvider', 'todoStorageProvider', function ( $stateProvider: any, todoStorageProvider: any) {
+        .config(['$stateProvider', 'todoStorageProvider', function ( $stateProvider: any, todoStorageProvider: TodoStorageProvider) {
             'use strict';
 
             todoStorageProvider.setType('local');
@@ -25,7 +25,7 @@ namespace todos
             $stateProvider.state('root', root);
             $stateProvider.state('status', status);
         }])
-        .run(['todoStorage', function (store: any){
+        .run(['todoStorage', function (store: IStore){
             store.get();
         }]);
     angular.element(document).ready(function () {

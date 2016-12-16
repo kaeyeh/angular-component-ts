@@ -15,9 +15,10 @@
     "files": [
 			"typings/index.d.ts",
       "js/app.ts",
-			"js/directives/todoFocus.ts",
-			"js/directives/todoEscape.ts",
-			"js/services/todoStorage.ts",
+			"js/directives/TodoFocus.ts",
+			"js/directives/TodoEscape.ts",
+      "js/services/Todo.ts",
+			"js/services/TodoStorage.ts",
 			"js/components/TodoForm.ts",
 			"js/components/TodoList.ts"
 

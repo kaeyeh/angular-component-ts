@@ -10,10 +10,10 @@ namespace todos {
     	constructor () {
 
 		}
-        link (scope:any , elem:any, attrs:any) {
-          elem.bind('keydown', angular.bind( this, function (event: any) {
+        link (scope:ng.IScope , elem: ng.IAugmentedJQuery, attrs: ng.IAttributes) {
+          elem.bind('keydown', <any>angular.bind( this, function (event: any) {
             if (event.keyCode === this.ESCAPE_KEY) {
-              scope.$apply(attrs.todoEscape);
+              scope.$apply(attrs['todoEscape']);
             }
           }));
 
