@@ -35,7 +35,9 @@ namespace todos {
     angular.module('todomvc')
         .component('todoForm', {
             //templateUrl: 'js/components/TodoForm.html',
-            templateUrl: 'TodoForm.html',
+            templateUrl: function ($element:any, $attrs:any) {
+                return $attrs.templateUrl;
+            },
             controller: TodoForm
         });
 }

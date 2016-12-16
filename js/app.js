@@ -56,7 +56,9 @@ var todos;
     TodoForm.$inject = ['todoStorage'];
     angular.module('todomvc')
         .component('todoForm', {
-        templateUrl: 'TodoForm.html',
+        templateUrl: function ($element, $attrs) {
+            return $attrs.templateUrl;
+        },
         controller: TodoForm
     });
 })(todos || (todos = {}));
@@ -149,7 +151,9 @@ var todos;
         'todoStorage'
     ];
     angular.module('todomvc').component('todoList', {
-        templateUrl: 'TodoList.html',
+        templateUrl: function ($element, $attrs) {
+            return $attrs.templateUrl;
+        },
         controller: TodoList
     });
 })(todos || (todos = {}));

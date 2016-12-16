@@ -113,12 +113,13 @@ namespace todos {
             }));
         }
 
-
     }
 
     angular.module('todomvc').component('todoList', {
-        //templateUrl: 'js/components/TodoList.html',
-        templateUrl: 'TodoList.html',
+
+        templateUrl: function ($element:any, $attrs:any) {
+            return $attrs.templateUrl;
+        },
         controller: TodoList
     });
 }
