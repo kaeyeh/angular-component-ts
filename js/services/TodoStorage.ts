@@ -172,9 +172,9 @@ namespace todos {
                 return $injector.get('localStorage');
             }
         }
-        static factory () {
-                return new TodoStorageProvider();
-        }
+//        static factory () {
+//                return new TodoStorageProvider();
+//        }
     }
     /**
      * Services that persists and retrieves todos from localStorage or a backend API
@@ -184,6 +184,6 @@ namespace todos {
      * model.
      */
 
-    angular.module('todomvc').provider('todoStorage', TodoStorageProvider.factory);
+    angular.module('todomvc').provider('todoStorage', TodoStorageProvider);
 
 }

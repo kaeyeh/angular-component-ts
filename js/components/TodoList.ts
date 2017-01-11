@@ -120,9 +120,6 @@ namespace todos {
         templateUrl: function ($element:any, $attrs:any) {
             return $attrs.templateUrl;
         },
-        controller: TodoList,
-        // bindings: {
-        //     templateUrl: '@'
-        // }
+        controller: TodoList
     });
 }
