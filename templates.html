@@ -34,12 +34,25 @@
             <li>
                 <a ng-class="{selected: status == ''} " href="#/">All</a>
             </li>
-            <li>
-                <a ng-class="{selected: status == 'active'}" href="#/active">Active</a>
-            </li>
-            <li>
-                <a ng-class="{selected: status == 'completed'}" href="#/completed">Completed</a>
-            </li>
+
+            <!--
+                            <li>
+                                <a ng-class="{selected: status == 'active'}" ui-sref="status({status: 'active'})">Active</a>
+                            </li>
+                            <li>
+                                <a ng-class="{selected: status == 'completed'}" ui-sref="status({status: 'completed'})">Completed</a>
+                            </li>
+
+                        -->
+                            <li>
+                                <a ng-class="{selected: status == 'active'}" ui-sref="status({status: 'active'})"  ui-sref-opts="{location:false}">Active</a>
+                            </li>
+                            <li>
+                                <a ng-class="{selected: status == 'completed'}" ui-sref="status({status: 'completed'})" ui-sref-opts="{location:false}">Completed</a>
+                            </li>
+
+
+
         </ul>
         <button id="clear-completed" ng-click="$ctrl.clearCompletedTodos()" ng-show="$ctrl.completedCount">Clear
             completed

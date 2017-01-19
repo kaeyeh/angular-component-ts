@@ -10,20 +10,31 @@ namespace todos
 {
 
     angular.module('todomvc', ['ui.router', 'ngResource'])
-        .config(['$stateProvider', 'todoStorageProvider', function ( $stateProvider: any, todoStorageProvider: TodoStorageProvider) {
+        .config(['$stateProvider', '$urlRouterProvider', 'todoStorageProvider', function ( $stateProvider: any, 
+              $urlRouterProvider: any, todoStorageProvider: TodoStorageProvider) {
             'use strict';
 
             todoStorageProvider.setType('local');
-            let root = {
-                url: ''
-            };
-            let status = {
-                url: '/:status',
-                parent: 'root'
-            };
 
-            $stateProvider.state('root', root);
-            $stateProvider.state('status', status);
+
+
+            /*one state with parameters */
+            $stateProvider.state('status', {
+                url: '/:status?var=:xy'
+            });
+
+            /*  two states without parameters
+            $stateProvider.state('status1', {
+                url: '/completed'
+            });
+            $stateProvider.state('status2', {
+                url: '/active'
+            });
+            */
+
+
+            $urlRouterProvider.otherwise('/all');
+
         }])
         .run(['todoStorage', function (store: IStore){
             store.get();
