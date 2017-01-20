@@ -20,7 +20,7 @@ namespace todos
 
             /*one state with parameters */
             $stateProvider.state('status', {
-                url: '/:status?var=:xy'
+                url: '/:status'
             });
 
             /*  two states without parameters

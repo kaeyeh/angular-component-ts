@@ -11,10 +11,11 @@ namespace todos {
             '$scope',
             '$filter',
             '$transitions',
+            '$stateParams',
             'todoStorage'
         ];
 
-        constructor($scope: ng.IScope, private $filter: any, $transitions: any, private store: any) {
+        constructor($scope: ng.IScope, private $filter: any, $transitions: any, $stateParams: any, private store: any) {
 
 
             this.todos = this.store.todos;
@@ -28,7 +29,7 @@ namespace todos {
 
             // Monitor the current route for changes and adjust the filter accordingly.
             $transitions.onSuccess({to: 'status'}, angular.bind(this, function (trans: any) {
-                var status = this.status = trans._targetState._params.status || '';
+                var status = this.status = $stateParams.status || '';
                 this.statusFilter = (status === 'active') ?
                     {completed: false} : (status === 'completed') ?
                         {completed: true} : {};

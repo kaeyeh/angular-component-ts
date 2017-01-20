@@ -1,18 +1,13 @@
 var todos;
 (function (todos) {
     angular.module('todomvc', ['ui.router', 'ngResource'])
-        .config(['$stateProvider', 'todoStorageProvider', function ($stateProvider, todoStorageProvider) {
+        .config(['$stateProvider', '$urlRouterProvider', 'todoStorageProvider', function ($stateProvider, $urlRouterProvider, todoStorageProvider) {
             'use strict';
             todoStorageProvider.setType('local');
-            var root = {
-                url: ''
-            };
-            var status = {
-                url: '/:status',
-                parent: 'root'
-            };
-            $stateProvider.state('root', root);
-            $stateProvider.state('status', status);
+            $stateProvider.state('status', {
+                url: '/:status'
+            });
+            $urlRouterProvider.otherwise('/all');
         }])
         .run(['todoStorage', function (store) {
             store.get();
@@ -253,7 +248,7 @@ var todos;
 var todos;
 (function (todos) {
     var TodoList = (function () {
-        function TodoList($scope, $filter, $transitions, store) {
+        function TodoList($scope, $filter, $transitions, $stateParams, store) {
             this.$filter = $filter;
             this.store = store;
             this.todos = this.store.todos;
@@ -264,7 +259,7 @@ var todos;
                 this.allChecked = !this.remainingCount;
             }), true);
             $transitions.onSuccess({ to: 'status' }, angular.bind(this, function (trans) {
-                var status = this.status = trans._targetState._params.status || '';
+                var status = this.status = $stateParams.status || '';
                 this.statusFilter = (status === 'active') ?
                     { completed: false } : (status === 'completed') ?
                     { completed: true } : {};
@@ -336,6 +331,7 @@ var todos;
         '$scope',
         '$filter',
         '$transitions',
+        '$stateParams',
         'todoStorage'
     ];
     angular.module('todomvc').component('todoList', {
@@ -343,6 +339,13 @@ var todos;
             return $attrs.templateUrl;
         },
         controller: TodoList
+    });
+})(todos || (todos = {}));
+var todos;
+(function (todos) {
+    angular.module('todomvc')
+        .component('layout1', {
+        templateUrl: 'Layout1.html'
     });
 })(todos || (todos = {}));
 //# sourceMappingURL=app.js.map

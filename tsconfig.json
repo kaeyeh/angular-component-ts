@@ -20,7 +20,8 @@
       "js/services/Todo.ts",
 			"js/services/TodoStorage.ts",
 			"js/components/TodoForm.ts",
-			"js/components/TodoList.ts"
+			"js/components/TodoList.ts",
+      "js/components/Layout1.ts"
 
     ]
 }
